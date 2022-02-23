@@ -7,8 +7,9 @@
 $(document).ready(function () {
     $("#keyboard-upper-container").hide();
     $('#sentence').text(currentSentence);
+    
 
-    let sentences = ['ten ate neite ate nee enet ite ate inet ent eate',
+    const sentences = ['ten ate neite ate nee enet ite ate inet ent eate',
         'Too ato too nOt enot one totA not anot tOO aNot',
         'oat itain oat tain nate eate tea anne inant nean',
         'itant eate anot eat nato inate eat anot tain eat',
@@ -19,6 +20,7 @@ $(document).ready(function () {
     var currentSentence = sentences[sentencesIndex]
     var letters = currentSentence.split('', currentSentence.length)
     var currentLetter = letters[lettersIndex];
+    var blockPosition = 0; // number of pixels from the left for yellow block
     $('#target-letter').text(currentLetter);
 
     $(document).keydown(function (e) {
@@ -31,6 +33,8 @@ $(document).ready(function () {
             lettersIndex++;
             currentLetter = letters[lettersIndex]; 
             $('#target-letter').text(currentLetter);
+            blockPosition += 17.5 
+            $('#yellow-block').css("left", blockPosition);
             }
             if (lettersIndex == currentSentence.length) {
                 $('#sentence').text(" "); 
@@ -41,6 +45,8 @@ $(document).ready(function () {
                 letters = currentSentence.split('', currentSentence.length)
                 currentLetter = letters[lettersIndex];
                 $('#target-letter').text(currentLetter);
+                blockPosition = 0;
+                $('#yellow-block').css("left", blockPosition) 
             }
             
         };
@@ -65,10 +71,11 @@ $(document).ready(function () {
     });
 
 
+
     screenSentence();
 
     function screenSentence() {
-        $('#sentence').append(currentSentence);
+        $('#sentence').text(currentSentence);
     }
 
 
